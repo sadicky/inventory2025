@@ -68,7 +68,7 @@ if ($trans->select_all_op_count($_POST['op_id']) == 0) {
         $descript = 'Dette';
         $id_bq = $bq->caisse_id;
         $pos_id = $_SESSION['pos'];
-        $create_date = date('Y-m-d');
+        $create_date = $op->create_date;
         $status = 1;
         $partyCode = $op->party_code;
         $staff_id = $op->tar_id;
@@ -95,7 +95,7 @@ if ($trans->select_all_op_count($_POST['op_id']) == 0) {
         $descript = 'Proformat';
         $id_bq = $bq->caisse_id;
         $pos_id = $_SESSION['pos'];
-        $create_date = date('Y-m-d');
+        $create_date =  $op->create_date;
         $status = 1;
         $staff_id = $op->tar_id;
         $partyCode = $op->party_code;
@@ -112,7 +112,7 @@ if ($trans->select_all_op_count($_POST['op_id']) == 0) {
         $id_bq = $bq->caisse_id;
         $partyCode = $op->party_code;
         $pos_id = $_SESSION['pos'];
-        $create_date = date('Y-m-d');
+        $create_date =  $op->create_date;
         $status = 1;
         $staff_id = $op->tar_id;
         $mode_paie = "CAISSE";

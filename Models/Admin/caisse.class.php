@@ -10,11 +10,11 @@ class Caisse
         $db = getConnection();
         $add1 = $db->prepare("INSERT INTO tbl_caisses (caisse_name,branche_id,status) VALUES (?,?,?)");
         $addline1 = $add1->execute(array($caisse, $branche, $status)) or die(print_r($add1->errorInfo()));
-       
+
         return $addline1;
     }
 
-  
+
     public function getCaisses()
     {
         $db = getConnection();
@@ -26,7 +26,7 @@ class Caisse
             $tbP[] = $data;
         }
         return $tbP;
-    } 
+    }
     public function getCaisseBranche($name)
     {
         $db = getConnection();
@@ -58,25 +58,22 @@ class Caisse
         return $tbP;
     }
 
-    
+
     public function select_id($branche)
     {
         $db = getConnection();
-        try
-        {
-        $sql =  "SELECT * FROM tbl_caisses as c, tbl_branches as b, tbl_stores as s 
+        try {
+            $sql =  "SELECT * FROM tbl_caisses as c, tbl_branches as b, tbl_stores as s 
             WHERE  b.branche_id = c.branche_id and s.branche_id=b.branche_id and c.store_id =?";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1,$branche);
-        $stmt->execute();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $branche);
+            $stmt->execute();
             $rowObject = $stmt->fetch(PDO::FETCH_OBJ);
             return $rowObject;
+        } catch (PDOException $ex) {
+            return $ex;
         }
-        catch(PDOException $ex)
-            {
-                 return $ex;
-            }
-     }
+    }
     public function searchAllCaisses($let)
     {
         $db = getConnection();
@@ -89,71 +86,62 @@ class Caisse
         }
         return $tbP;
     }
- 
-    public function updateCaisse($caisse, $status, $type,$id)
+
+    public function updateCaisse($caisse, $status, $id)
     {
         $db = getConnection();
-        $update = $db->prepare("UPDATE tbl_caisses SET caisse_name=?,status=?,caisse_type=? WHERE caisse_id =?");
-        $ok = $update->execute(array($caisse, $status, $type,$id)) or die(print_r($update->errorInfo()));
+        $update = $db->prepare("UPDATE tbl_caisses SET caisse_name=?,status=? WHERE caisse_id =?");
+        $ok = $update->execute(array($caisse, $status, $id)) or die(print_r($update->errorInfo()));
         return $ok;
     }
-    
-    public function select_status($status,$branche)
+
+    public function select_status($status, $branche)
     {
         $db = getConnection();
-        try
-        {
-        $sql =  "SELECT * FROM tbl_caisses WHERE status=? and branche_id=?";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1,$status);
-        $stmt->bindValue(2,$branche);
-        $stmt->execute();
+        try {
+            $sql =  "SELECT * FROM tbl_caisses WHERE status=? and branche_id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $status);
+            $stmt->bindValue(2, $branche);
+            $stmt->execute();
             $rowObject = $stmt->fetch(PDO::FETCH_OBJ);
-            
-            return $rowObject ;
+
+            return $rowObject;
+        } catch (PDOException $ex) {
+            return $ex;
         }
-        catch(PDOException $ex)
-            {
-                 return $ex;
-            }
     }
 
-    public function select_status_2($status,$branche)
+    public function select_status_2($status, $branche)
     {
         $db = getConnection();
-        try
-        {
-        $sql =  "SELECT * FROM tbl_caisses WHERE status=? and caisse_id=?";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1,$status);
-        $stmt->bindValue(2,$branche);
-        $stmt->execute();
+        try {
+            $sql =  "SELECT * FROM tbl_caisses WHERE status=? and caisse_id=?";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $status);
+            $stmt->bindValue(2, $branche);
+            $stmt->execute();
             $rowObject = $stmt->fetch(PDO::FETCH_OBJ);
-            
-            return $rowObject ;
+
+            return $rowObject;
+        } catch (PDOException $ex) {
+            return $ex;
         }
-        catch(PDOException $ex)
-            {
-                 return $ex;
-            }
     }
 
     public function select_status_3($status)
     {
         $db = getConnection();
-        try
-        {
-        $sql =  "SELECT * FROM tbl_caisses WHERE status=?";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(1,$status);
-        $stmt->execute();
+        try {
+            $sql =  "SELECT * FROM tbl_caisses WHERE status=?";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(1, $status);
+            $stmt->execute();
             $rowObject = $stmt->fetch(PDO::FETCH_OBJ);
-            
-            return $rowObject ;
+
+            return $rowObject;
+        } catch (PDOException $ex) {
+            return $ex;
         }
-        catch(PDOException $ex)
-            {
-                 return $ex;
-            }
     }
 }

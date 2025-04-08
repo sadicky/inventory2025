@@ -22,6 +22,7 @@ if (isset($_SESSION['op_vente_id'])) {
     $staff = $users->getStaffId($o->tar_id);
     $doc_type = $o->doc_type;
     $pos_id = $o->pos_id;
+    $create = $o->create_date;
     echo '<input type="hidden" value="' . $_SESSION['op_vente_id'] . '" id="crt_op_id" name="crt_op_id">';
 
     // die();
@@ -66,18 +67,25 @@ if (isset($_SESSION['op_vente_id'])) {
                                 <label class="control-label">Qté</label>
                                 <input type="text" name="qt" id="qt" class="form-control" required>
                             </div>
-                            <hr>
                             <div class="col-md-6">
                                 <label class="control-label">Agent</label>
                                 <?php if (isset($_SESSION['op_vente_id'])) : ?>
-                                    <input type="text" readonly class="form-control" name="agent_id" id="agent_id" readonly value="<?= $staff->noms ?>" />
+                                    <input type="text" class="form-control" name="agent_id" id="agent_id" readonly value="<?= $staff->noms ?>" />
                                 <?php else: ?>
-                                    <select name="agent_id" id="agent_id" class="select2">
+                                    <select name="agent_id" id="agent_id" class="custom-select">
                                         <option value="">--</option>
                                         <?php foreach ($staffs as $s): ?>
                                             <option value="<?= $s->staff_id ?>"><?= $s->noms ?></option>
                                         <?php endforeach ?>
                                     </select>
+                                <?php endif ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Date</label>
+                                <?php if (isset($_SESSION['op_vente_id'])) : ?>
+                                    <input type="text" class="form-control" name="date" id="date" readonly value="<?= $create ?>" />
+                                <?php else: ?>
+                                    <input type="date" class="form-control" name="date" id="date" required />
                                 <?php endif ?>
                             </div>
 

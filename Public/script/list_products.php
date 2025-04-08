@@ -11,7 +11,7 @@ $list = $products->searchAllDetails($keyword);
 foreach ($list as $row) {
         $response[] = array(
                 "value" => $row->product_id,
-                "label" => $row->details
+                "label" =>  $row->category_name . ' - ' . $row->details
         );
 }
 

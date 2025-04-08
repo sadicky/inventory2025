@@ -158,10 +158,11 @@ $d = $operations->getOperationType('Bon')->last_id;
                             <div class="col-md-4"><br>
                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Enregistrer</button>
                                 <?php if (isset($_SESSION['op_appro_id']) and $operations->exist_in_trans($_SESSION['op_appro_id']) and $details->nb_op($_SESSION['op_appro_id']) > 0) { ?>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-warning end_appro" data-id="<?php echo $_SESSION['op_appro_id']; ?>"><i class="fa fa-minus"></i> Cloturer</a>
+                                    <a href="javascript:void(0)" class="ms-btn btn-sm btn-warning end_appro" data-id="<?php echo $_SESSION['op_appro_id']; ?>"><i class="fa fa-minus"></i> Cloturer</a>
                                 <?php } ?>
                                 <?php if (isset($_SESSION['op_appro_id']) and !$operations->exist_in_trans($_SESSION['op_appro_id'])) { ?>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-info end_appro"><i class="fa fa-times"></i> Terminer</a>
+                                    <a href="javascript:void(0)" class="ms-btn btn-sm btn-info new_approv"><i class="fa fa-plus"></i> Nouveau</a>
+                                    <a href="javascript:void(0)" class="ms-btn btn-sm btn-danger end_appro"><i class="fa fa-times"></i> Terminer</a>
                                 <?php } ?>
 
                                 <?php if (isset($_SESSION['op_appro_id']) and $details->nb_op($_SESSION['op_appro_id']) == 0) { ?>

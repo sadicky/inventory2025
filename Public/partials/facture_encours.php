@@ -66,13 +66,13 @@ $coupons = new Coupon();
       <table class="table table-bordered table-sm tab">
         <thead>
           <tr>
-            <th>No Fact</th>
             <th>Date</th>
             <th>Client</th>
             <th>Montant</th>
             <th>Statut</th>
             <th>Type</th>
             <th>Etablie par</th>
+            <th>Annuer</th>
           </tr>
         </thead>
 
@@ -86,9 +86,7 @@ $coupons = new Coupon();
             $pers2 = $users->select($value['user_id']);
             $vente = $ventes->select($value['op_id']);
             $pers = $customers->select($value['party_code']);
-            echo '<tr>
-						<td><a href="javascript:void(0)" class="row_edit_sale_hist" style="cursor:pointer" data-id="' . $value['op_id'] . '"> ';
-            echo '#0000' . $vente->idvente . '</a></td>';
+            echo '<tr>';
             echo '<td><a href="javascript:void(0)" class="row_edit_sale_hist" style="cursor:pointer" data-id="' . $value['op_id'] . '">' . $value['create_date'] . '</a></td><td>' . @$pers->customer_name . '</td><td align="right"><b>' . number_format($det->select_sum_op($value['op_id']), 0, ',', ' ') . ' FC</b></td>';
             echo '<td>';
             if ($value['ben_id'] == 0) echo '<span class="badge badge-danger">Encours</span>';
@@ -101,7 +99,8 @@ $coupons = new Coupon();
             elseif ($value['is_paid'] == 2) echo '<b>Proformat</b>';
             echo '</td><td>';
             echo $pers2->noms;
-            echo '</td></tr>';
+            echo '</td>
+            <td><a href="javascript:void(0)" title="' . $value['op_id'] . '" id="' . $value['op_id'] . '" class="btn-ms btn-dark btn-sm delete_op"> <i class="fa fa-times-circle"></i> Supprimer </a></td></tr>';
             $totM += $det->select_sum_op($value['op_id']);
             $i++;
           }

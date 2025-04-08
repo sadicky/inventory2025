@@ -98,10 +98,10 @@ $(document).ready(function () {
       },
       success: function (d) {
         if (d == 1) {
-          $('#available_msg').html('<span class="badge badge-danger">Ce medicament existe déjà</span>');
+          $('#available_msg').html('<span class="badge badge-danger">Ce produit existe déjà</span>');
           $('.enreg').attr("disabled", true);
         } else {
-          $('#available_msg').html('<span class="badge badge-success">Ce nom est disponible</span>');
+          $('#available_msg').html('<span class="badge badge-success">Ce nom est disponible. Vous pouvez l\'ajouter</span>');
           $('.enreg').attr("disabled", false);
         }
       }

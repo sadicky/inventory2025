@@ -425,6 +425,20 @@ where quantity > 0 and pos_id='" . $pos . "' and details like '%" . $prod . "%' 
         }
     }
 
+    public function select_all_crt_tar_($prod, $pos)
+    {
+        $db = getConnection();
+        try {
+            $stmt = $db->prepare("SELECT sum(quantity) as quantity, tbl_products.product_id,product_name,details,category_name 
+            FROM tbl_products join tbl_stocks on tbl_products.product_id=tbl_stocks.product_id join tbl_category c on c.category_id =  tbl_products.category_id
+where quantity > 0 and pos_id='" . $pos . "' and details like '%" . $prod . "%' GROUP BY tbl_products.product_id order by product_name limit 0,10");
+            $stmt->execute();
+            $stat = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $stat;
+        } catch (PDOException $ex) {
+            return $ex;
+        }
+    }
     public function select_all_crt_tar_0($prod, $pos)
     {
         $db = getConnection();

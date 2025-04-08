@@ -73,11 +73,7 @@ if ($_SESSION['role'] == 1 && $_SESSION['role'] == 4) {
                                 <label class="control-label">Category</label>
                                 <select class="custom-select" id="cat_id" name="cat_id">
                                     <option value="">Tous</option>
-                                    <?php
-                                    foreach ($categorie as $value) {
-                                        echo '<option value="' . $value->category_id . '">' . $value->category_name . '</option>';
-                                    }
-                                    ?>
+
                                 </select>
 
                             </div>

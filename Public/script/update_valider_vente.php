@@ -10,7 +10,7 @@ $operations = $op->getOperationId($_POST['op_id']);
 $ventes = $vente->select($_POST['op_id']);
 $Id = $ventes->idvente;
 $payer = $ventes->amount;
-$date = date('Y-m-d');
+$date = $operations->create_date;
 // var_dump($operations->is_paid);
 // die();
 if ($operations->state == 0) {

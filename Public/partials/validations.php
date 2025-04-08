@@ -9,6 +9,7 @@ require_once('../../Models/Admin/operation.class.php');
 require_once('../../Models/Admin/stock.class.php');
 require_once('../../Models/Admin/user.class.php');
 require_once('../../Models/Admin/vente.class.php');
+require_once "../../Models/Admin/caisse.class.php";
 require_once('../../Models/Admin/customer.class.php');
 $user = new User();
 $details = new detOperation();
@@ -20,8 +21,13 @@ $stocks = new Stock();
 $ventes = new Vente();
 $customers = new Customer();
 $operations = new Operation();
+$caisses = new Caisse();
 
-$datas = $operations->select_all_facture_no_0();
+$pos = $_SESSION['pos'];
+$pos_id = $stores->getPOS($pos);
+$caisse = $caisses->getCaisseBranche($pos_id->branche_id);
+
+$datas = $operations->select_all_facture_no_0($caisse->caisse_id);
 
 ?>
 <div class="ms-panel" style="margin: 30px;">

@@ -174,6 +174,15 @@ class Operation
         $stmt->execute([$user_id, $op_type, $jour_id, $party_code, $state, $is_paid, $personne_id, $party_type, $pos_id, $caisse]);
         return $db->lastInsertId();
     }
+    public function setOperation_($date, $user_id, $op_type, $jour_id, $party_code, $state, $is_paid, $personne_id, $party_type, $pos_id, $caisse)
+    {
+        $db = getConnection();
+        $sql = "INSERT INTO tbl_operations (create_date,user_id,op_type,jour_id,party_code,state,is_paid,id_per,party_type,pos_id,caisse_id)
+            VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$date, $user_id, $op_type, $jour_id, $party_code, $state, $is_paid, $personne_id, $party_type, $pos_id, $caisse]);
+        return $db->lastInsertId();
+    }
 
 
     //
@@ -320,12 +329,12 @@ class Operation
     }
 
 
-    public function select_all_facture_no_0()
+    public function select_all_facture_no_0($pos_id)
     {
         $db = getConnection();
         try {
-            $stmt = $db->prepare("SELECT * FROM tbl_operations where state=0 and ben_id=0 order by create_date DESC");
-            $stmt->execute();
+            $stmt = $db->prepare("SELECT * FROM tbl_operations where state=0 and caisse_id=? and ben_id=0 order by create_date DESC");
+            $stmt->execute([$pos_id]);
             $stat = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $stat;
         } catch (PDOException $ex) {

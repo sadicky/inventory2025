@@ -24,22 +24,18 @@ if (isset($_POST["operation"])) {
         }
 
         $output["msg"] = 'Enregistrement reussi avec succès';
-    } 
-    else if ($_POST["operation"] == "Edit") {
+    } else if ($_POST["operation"] == "Edit") {
         $caisse_id = isset($_POST['caisse_id']) ? $_POST['caisse_id'] : "";
         $caisse = isset($_POST['libelle']) ? $_POST['libelle'] : "";
-        $type = isset($_POST['type_caisse']) ? $_POST['type_caisse'] : "";
         $status = isset($_POST['status']) ? $_POST['status'] : "";
 
-        $caisses->updateCaisse($caisse, $status, $type, $caisse_id);
+        $caisses->updateCaisse($caisse, $status, $caisse_id);
 
         $output["msg"] = 'Modification reussie avec succès';
         unset($_GET['id']);
-        $output["id"] =$caisse_id;
+        $output["id"] = $caisse_id;
     }
-}
-else
-{
-echo "operation existe pas";
+} else {
+    echo "operation existe pas";
 }
 echo json_encode($output);

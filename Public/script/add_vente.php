@@ -81,10 +81,9 @@ if (!isset($_SESSION['op_vente_id'])) {
   $is_paid = 0;
   $pos_id  = $posId;
   $user_id = $_SESSION['id'];
-  if ($jour->start_date == '') echo $op_createDate . ' = ' . date('Y-m-d');
-  else $op_createDate = date('Y-m-d');
+  $op_createDate =  $_POST['date'];
 
-  $_SESSION['op_vente_id'] = $operations->setOperation($user_id, $op_type, $jour_id, $party_code, $state, $is_paid, $periode_id, $party_type, $pos_id, $bq);
+  $_SESSION['op_vente_id'] = $operations->setOperation_($op_createDate, $user_id, $op_type, $jour_id, $party_code, $state, $is_paid, $periode_id, $party_type, $pos_id, $bq);
 
   $operations->update_one($_SESSION['op_vente_id'], 'op_id', 'tar_id', $agent);
 }
