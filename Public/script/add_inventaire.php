@@ -26,14 +26,14 @@ $jour=new Journal();
 $sorties=new Sortie();
 
 $jourId=$_SESSION['jour'];
-
+// var_dump($_SESSION['periode']==$_POST['id_per']);die();
 if($_SESSION['periode']==$_POST['id_per'])
 {
-  
+  // var_dump($_POST['pos_id']);die();
   $crt_op=$operations->select_one_per($_POST['id_per'],$_POST['pos_id']);
   $_SESSION['op_inv_id']=$operations->select_last('Inventaire',$_POST['id_per'],$_POST['pos_id']);
 
-  if($crt_op==0)
+  if($crt_op==1)
   {
     $op_type = 7;
     $party_type = 1;

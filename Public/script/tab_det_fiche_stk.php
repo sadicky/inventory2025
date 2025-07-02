@@ -8,7 +8,7 @@ require_once('../../Models/Admin/category.class.php');
 require_once('../../Models/Admin/commande.class.php');
 require_once('../../Models/Admin/detOperation.class.php');
 require_once('../../Models/Admin/journal.class.php');
-require_once('../../Models/Admin/operation.class.php');
+require_once('../../Models/Admin/operation.class.php'); 
 require_once('../../Models/Admin/product.class.php');
 require_once('../../Models/Admin/periode.class.php');
 require_once('../../Models/Admin/store.class.php');

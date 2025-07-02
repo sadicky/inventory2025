@@ -16,20 +16,22 @@ $st = $pos->getStoreId($_SESSION['pos']);
   <!-- Logo -->
   <div class="ms-d-block-lg">
     <a class="pl-0 ml-0 text-center" href="<?= WEBROOT ?>dashboard">
-      <img src="assets/img/costic/costic-logo-216x62.png" alt="logo">
+      <!-- <img src="assets/img/costic/costic-logo-216x62.png" alt="logo"> -->
     </a>
 
   </div>
   <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
     <!-- Dashboard -->
+    <?php if ($_SESSION['role'] == 1): ?>
     <li class="menu-item">
       <a href="javascript:void(0)" id="dashboard"> <span><i class="fa fa-home"></i>Entreprise </span>
       </a>
     </li>
-    <li class="menu-item">
+    <?php endif ?>
+    <!-- <li class="menu-item">
       <a href="javascript:void(0)" id="notes"> <span><i class="fa fa-edit"></i>Notes </span>
       </a>
-    </li>
+    </li> -->
     <?php if ($_SESSION['role'] == 1): ?>
       <!-- restaurants -->
       <li class="menu-item">
@@ -52,7 +54,7 @@ $st = $pos->getStoreId($_SESSION['pos']);
           <li> <a href="javascript:void(0)" id="fournisseurs">Fournisseurs</a></li>
           <!-- <li> <a href="<?= WEBROOT ?>fournisseurs">Fournisseurs</a></li> -->
           <li> <a href="javascript:void(0)" id="periode">Inventaires</a></li>
-          <li> <a href="javascript:void(0)" id="allstocks">Tous les Produits</a></li>
+          <!-- <li> <a href="javascript:void(0)" id="allstocks">Tous les Produits</a></li> -->
           <!-- <li> <a href="<?= WEBROOT ?>allstocks">Tous les Produits</a></li> -->
         </ul>
       <?php endif ?>
@@ -72,7 +74,10 @@ $st = $pos->getStoreId($_SESSION['pos']);
             <li> <a href="javascript:void(0)" id="newcustomer">Clients</a> </li>
             <li> <a href="javascript:void(0)" id="depenses">Dépenses</a> </li>
             <!-- <li> <a href="javascript:void(0)" id="avances">Avance Dette</a> </li> -->
+            
+    <?php if ($_SESSION['role'] != 1): ?>
             <li> <a href="javascript:void(0)" id="all_cust_cred">Les Redevables</a> </li>
+            <?php endif ?>
           </ul>
         </li>
       <?php endif ?>
@@ -91,7 +96,7 @@ $st = $pos->getStoreId($_SESSION['pos']);
             <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2 || $_SESSION['role'] == 5): ?>
               <li> <a href="javascript:void(0)" id="rpt_stock">Rapport du Stock</a> </li>
             <?php endif ?>
-            <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2 || $_SESSION['role'] == 4): ?>
+            <?php if ($_SESSION['role'] == 2 || $_SESSION['role'] == 4): ?>
               <!-- <li> <a href="javascript:void(0)" id="rstock">Rapport de Paiement</a> </li> -->
               <li> <a href="javascript:void(0)" id="rpt_endom">Rapport des Endomagés</a> </li>
             <?php endif ?>
@@ -130,9 +135,9 @@ $st = $pos->getStoreId($_SESSION['pos']);
             <li> <a href="javascript:void(0)" id="valorisations">Valeurs Produits</a> </li>
             <li> <a href="javascript:void(0)" id="valorisations_vente">Valeurs Produits Vendu</a> </li>
             <li> <a href="javascript:void(0)" id="valorisations_dette">Valeurs Dettes</a> </li>
-            <li> <a href="javascript:void(0)" id="salaires">Salaires</a> </li>
+            <!-- <li> <a href="javascript:void(0)" id="salaires">Salaires</a> </li>
             <li> <a href="javascript:void(0)" id="depenses">Depenses</a> </li>
-            <li> <a href="javascript:void(0)" id="rpt_sale">Ventes</a> </li>
+            <li> <a href="javascript:void(0)" id="rpt_sale">Ventes</a> </li> -->
           </ul>
         </li>
       <?php endif ?>

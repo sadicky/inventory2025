@@ -39,7 +39,7 @@ if (!empty($_POST['pos_id'])) {
           <div class="col-md-2">
             <br>
             <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
-            <input type="text" name="op_id" id="op_id" value="<?= $_SESSION['op_inv_id'] ?>">
+            <input type="hidden" name="op_id" id="op_id" value="<?= $_SESSION['op_inv_id'] ?>">
             <input type="hidden" name="det_id" id="det_id" value="">
             <input type="hidden" name="operation" id="operation_inv" value="Add">
           </div>

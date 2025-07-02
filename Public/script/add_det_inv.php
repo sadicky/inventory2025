@@ -8,16 +8,16 @@ require_once('../../Models/Admin/stock.class.php');
 $details = new detOperation();
 $stores = new POS();
 $products = new Product();
-$stocks = new Stock();
+$stocks = new Stock(); 
 $operations = new Operation();
 
 $op = $operations->getOperationId($_SESSION['op_inv_id']);
 $prodId = $_POST['prod_id'];
-$posId = $_SESSION['op_inv_id'];
+$posId = $_SESSION['pos'];
 
 $prod = $products->getProductId($prodId);
 
-$qt = (float)str_replace(',', '', $_POST['qt']);
+$qt = (int)str_replace(',', '',$_POST['qt']);
 
 if (isset($_POST["operation"])) {
   if (!empty($_POST['det_id'])) {
@@ -26,7 +26,7 @@ if (isset($_POST["operation"])) {
 
   $st = $stocks->select_by_prod($prodId, $posId);
   $exist = $stocks->existstock_by_prod($prodId, $posId);
-
+  
   if ($_POST["operation"] == "Add") {
 
     $prod_id = $prodId;
@@ -37,11 +37,10 @@ if (isset($_POST["operation"])) {
     $last_det = $details->setDetailOperation($op_id, $prod_id, $quantity, $price);
 
     if (!$exist) {
-      $last_stk = $stocks->insert($prod_id, $quantity, $pos_id);
+      $last_stk = $stocks->insert($prod_id, $quantity, $posId);
     } else {
       $qt_stk = $st->quantity + $qt;
-      $sto = $stocks->update_qt($st->stock_id, $qt_stk);
-      // $last_stk=$sto->stock_id;
+      $sto = $stocks->update_qt($st->stock_id, $quantity);
     }
 
     echo ' Enregistrement reussi ';

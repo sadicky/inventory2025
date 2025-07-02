@@ -606,6 +606,25 @@ class Operation
         }
     }
 
+    public function select_all($pos)
+    {
+
+        $db = getConnection();
+        try {
+            $stmt = $db->prepare("SELECT tbl_operations.*, tbl_products.*,tbl_details_operation.* 
+            FROM tbl_operations join (tbl_details_operation 
+            join tbl_products on tbl_details_operation.product_id=tbl_products.product_id) 
+            on tbl_operations.op_id=tbl_details_operation.op_id 
+            where pos_id=:pos");
+           $stmt->bindParam("pos", $pos);
+
+            $stmt->execute();
+            $stat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stat;
+        } catch (PDOException $ex) {
+            return $ex;
+        }
+    }
     public function select_all_by_date_rap_an_2($opType, $prod, $from_d, $pos, $per)
     {
         $db = getConnection();

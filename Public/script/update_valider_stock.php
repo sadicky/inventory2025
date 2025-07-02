@@ -12,28 +12,52 @@ $operations = $op->getOperationId($_POST['op_id']);
 $det = $details->select_one_det_op($_POST['op_id']);
 
 $posId = $operations->pos_id;
-
+ 
 if ($operations->state == 0) {
 
     $op->update_state($_POST["op_id"],1,1);
 
-    if($operations->op_type != 'Requisition') {
-    foreach ($det as $d){
-        $prodId = $d->product_id;
-        $quantity = $d->quantity;
-        
-        $exist = $stocks->existstock_by_prod($prodId, $posId);
-        
-        if (!$exist) {
-            $last_stk = $stocks->insert($prodId,$quantity,$posId);
-        } else {
+    if($operations->op_type == 'Approvisionnement') {
+        foreach ($det as $d){
+            $prodId = $d->product_id;
+            $quantity = $d->quantity;
             
-            $st = $stocks->select_by_prod($prodId, $posId);
-            $qt_stk = $st->quantity - $quantity; 
-            $last_stk = $stocks->update_qt($st->stock_id, $qt_stk);
+            $exist = $stocks->existstock_by_prod($prodId, $posId);
+            // var_dump($exist);die();
+            
+            if (!$exist) {
+                $last_stk = $stocks->insert($prodId,$quantity,$posId);
+            } else {
+                $st = $stocks->select_by_prod($prodId, $posId);
+                $qt_stk = $st->quantity + $quantity; 
+                $last_stk = $stocks->update_qt($st->stock_id, $qt_stk);
+            }
         }
-    }
-} else {
+    } else if($operations->op_type == 'Sortie') {
+        foreach ($det as $d){
+            $prodId = $d->product_id;
+            $quantity = $d->quantity;
+            
+            $exist = $stocks->existstock_by_prod($prodId, $posId);
+        }
+    }  else if($operations->op_type == 'Transfert') {
+        foreach ($det as $d){
+            $prodId = $d->product_id;
+            $quantity = $d->quantity;
+            
+            $exist = $stocks->existstock_by_prod($prodId, $posId);
+            
+            if (!$exist) {
+                $last_stk = $stocks->insert($prodId,$quantity,$posId);
+            } else {
+                
+                $st = $stocks->select_by_prod($prodId, $posId);
+                $qt_stk = $st->quantity - $quantity; 
+                $last_stk = $stocks->update_qt($st->stock_id, $qt_stk);
+            }
+        }
+        
+    } else {
         foreach ($det as $d){
             $prodId = $d->product_id;
             $quantity = $d->quantity;
@@ -49,7 +73,7 @@ if ($operations->state == 0) {
                 $last_stk = $stocks->update_qt($st->stock_id, $qt_stk);
             }
         }
-    }
+}
 }
 
 $msg = '<div class="alert alert-success" role="alert">

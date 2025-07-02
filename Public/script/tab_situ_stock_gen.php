@@ -27,6 +27,7 @@ $cat = new Category();
 $products = new Product();
 $stock = new Stock();
 $pos = new POS();
+$operations = new Operation();
 // $pack=new Package();
 $pr = new Tarif();
 $tarif = new Tarif();
@@ -44,9 +45,11 @@ if (!empty($catId)) {
   $datas = $stock->select_all_cat_gen($posId, $catId);
 } else {
   $datas = $stock->select_all_gen($posId);
+  
+  // $dat = $operations->select_all($posId);
 }
 
-// var_dump($datas);
+// var_dump($dat);
 ?>
 <div class="row">
   <div class="col-md-6">
@@ -75,17 +78,23 @@ if (!empty($catId)) {
             $last = $det->select_last_id('Approvisionnement', $un["product_id"]);
             $det_id = $last->last_id;
             $d = $det->select($det_id);
-            // var_dump($d->amount);
+            // var_dump($price->price);
             if (empty($price->price)) {
               $last = $det->select_last_id('Inventaire', $un["product_id"]);
               $det_id = $last->last_id;
               $det->select($det_id);
             }
             $pa = @$price->price;
+            // var_dump($price);
 
             $tot += $pa * $un['tot_qt'];
 
-            echo '<tr><td>' . $cats->category_name . '</td><td><a href="javascript:void(0)" class="fiche_det" data-id="' . $un['product_id'] . '">' . $prod->details . '</a></td><td>' . $un['tot_qt'] . '</td><td align="right">' . number_format($pa, 0, ',', ' ') . '</td><td align="right">' . number_format($pa * $un['tot_qt'], 0, ',', ' ') . '</td>';
+            echo '<tr>
+              <td>' . $cats->category_name . '</td>
+              <td><a href="javascript:void(0)" class="fiche_det" data-id="' . $un['product_id'] . '">' . $prod->details . '</a></td>
+              <td>' . $un['tot_qt'] . '</td>
+              <td align="right">' . number_format($pa, 0, ',', ' ') . '</td>
+              <td align="right">' . number_format($pa * $un['tot_qt'], 0, ',', ' ') . '</td>';
             echo '</tr>';
           }
           ?>

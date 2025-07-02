@@ -36,7 +36,7 @@ if (isset($_SESSION['op_vente_id'])) {
                     </div>
                     <div class="col-md-6 text-md-right">
                         <p>client: <b style="font-size: 15px;"><?= $cust->customer_name ?></b></p>
-                        <p>Agent: <b style="font-size: 15px;"><?= $staff->noms ?></b></p>
+                        <!-- <p>Agent: <b style="font-size: 15px;"><?= $staff->noms ?></b></p> -->
                     </div>
                 </div>
                 <!-- Invoice Table -->

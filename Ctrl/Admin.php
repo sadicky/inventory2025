@@ -99,6 +99,7 @@ function ProductTarif()
 		$branches = $branches->getBranches();
 		$data = $products->getProductId($id);
 		$priceData = $products->selectProductPrice2($id);
+		$price = $products->selectProductPrice($id);
 
 		include('Vues/Admin/tarif.php');
 		$contents = ob_get_contents();

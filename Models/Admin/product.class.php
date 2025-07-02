@@ -361,6 +361,15 @@ class Product
         return $stat;
     }
 
+    public function selectProductPrice($prodId)
+    {
+        $db = getConnection();
+        $stmt = $db->prepare("SELECT b.branche as branche, pr.price as montant, pr.price_last_update FROM tbl_prices as pr,tbl_products as p,tbl_branches as b
+                         WHERE pr.branche_id = b.branche_id and pr.product_id=p.product_id and p.product_id=?");
+        $stmt->execute([$prodId]);
+        $stat = $stmt->fetch(PDO::FETCH_OBJ);
+        return $stat;
+    }
 
     public function selectPrice($price)
     {

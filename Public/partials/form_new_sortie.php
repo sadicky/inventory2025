@@ -117,7 +117,7 @@ if (isset($_SESSION['op_sort_id'])) {
                                     <input type="text" name="qt" id="qt" class="form-control number-separator">
                                 </div>
                                 <div class="col-md-4">
-                                    <br>
+                                    <br> 
                                     <button type="submit" class="ms-btn btn-primary btn-sm"><i class="fa fa-save"></i> Enregistrer</button>
 
                                     <a href="javascript:void(0)" class="ms-btn btn-sm btn-info new_sort"><i class="fa fa-plus"></i> Nouveau</a>

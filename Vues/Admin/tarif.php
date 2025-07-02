@@ -7,13 +7,14 @@
     </nav>
     <div id="message"></div>
     <div id="page-content"></div>
+    <?php var_dump($price);?>
     <div class="ms-panel">
         <div class="ms-panel-header text-center">
             <h5>Tarif par Article : <?= $data->details; ?></h5>
         </div>
         <div class="ms-panel-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6"> 
                     <?php if ($_SESSION['role'] == 1): ?>
                         <form id="formulaire_product_price" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row p-2" style="border: 2px gray solid;">
@@ -57,7 +58,6 @@
                         </thead>
                         <tbody>
                             <?php
-                            // var_dump($priceData);
                             if ($priceData) {
                                 foreach ($priceData as $pr): ?>
                                     <tr>

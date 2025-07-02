@@ -399,7 +399,8 @@ class Stock
     {
         $db = getConnection();
         try {
-            $stmt = $db->prepare("SELECT sum(tbl_stocks.quantity) as tot_qt,tbl_stocks.product_id FROM tbl_stocks, tbl_products where tbl_stocks.product_id=tbl_products.product_id and pos_id=:posId and category_id=:catId group by tbl_stocks.product_id");
+            $stmt = $db->prepare("SELECT sum(tbl_stocks.quantity) as tot_qt,tbl_stocks.product_id FROM tbl_stocks, tbl_products 
+            where tbl_stocks.product_id=tbl_products.product_id and pos_id=:posId and category_id=:catId group by tbl_stocks.product_id");
             $stmt->bindParam('posId', $posId);
             $stmt->bindParam('catId', $catId);
             $stmt->execute();
@@ -408,7 +409,7 @@ class Stock
         } catch (PDOException $ex) {
             return $ex;
         }
-    }
+    } 
 
     public function select_all_lot($srch)
     {

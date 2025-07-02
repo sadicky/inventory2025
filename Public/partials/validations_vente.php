@@ -36,8 +36,8 @@ if ($_SESSION['role'] == 1) {
 } else {
   $st = $stores->getStoreId($_SESSION['pos']);
   $data_store = $branches->getBranche($st->branche_id);
+  // var_dump($data_store);die();
 }
-
 ?>
 <div class="ms-panel" style="margin: 30px;">
   <div class="ms-panel-header">
